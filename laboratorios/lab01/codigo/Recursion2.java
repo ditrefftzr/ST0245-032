@@ -1,4 +1,3 @@
-package aceptaelreto;
 /**
  * 
  * @author anietog1, ditrefftzr
