@@ -73,18 +73,44 @@ bool isOperand(char o){
   return o == '*' || o == '+' || o == '-' || o == '/';
 }
 
+int valueOf(char o){
+  // switch(o){
+  // case '1':
+  //   return 1;
+  // case '2':
+  //   return 2;
+  // case '3':
+  //   return 3;
+  // case '4':
+  //   return 4;
+  // case '5':
+  //   return 5;
+  // case '6':
+  //   return 6;
+  // case '7':
+  //   return 7;
+  // case '8':
+  //   return 8;
+  // case '9':
+  //   return 9;
+  // default:
+  //   return 0;
+  // }
+  return o - '0';
+}
+
 int punto3(string expre){
   stack<int> s;
   int l, r;
-
+  
   for(int i=0; i<expre.size(); ++i){
     if(!isOperand(expre[i]))
-      s.push((int)expre[i]);
+      s.push(valueOf(expre[i]));
       
     else{
-      l = s.top();
-      s.pop();
       r = s.top();
+      s.pop();
+      l = s.top();
       s.pop();
 
       switch(expre[i]){
@@ -104,13 +130,14 @@ int punto3(string expre){
     }
   }
   
-  return (int) s.top();
+  return s.top();
 }
 
 void testPunto3(){
   cout << "Ingrese la expresion" << endl;
   string e;
   cin >> e;
+
   cout << "OUTPUT" << endl;
   cout << punto3(e) << endl;
 }
