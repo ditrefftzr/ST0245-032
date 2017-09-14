@@ -4,7 +4,9 @@ import java.util.*;
  * @author agusn, ditrefftzr
  */
 public class Laboratory3 {
-
+    //Para los calculos de complejidad se utiliza la siguiente notacion:
+    //[A|L] <complejidad>, A para arreglos, L para listas, si no hay es genérico.
+    
     /**
      * Returns the product of the numbers in the list.
      *
@@ -13,13 +15,14 @@ public class Laboratory3 {
      * array.
      */
     public static int multiply(List<Integer> list) {
-        int n = 1;
+        int n = 1;//C
 
-        for (Integer i : list) {
+        for (Integer i : list) {//n
             n *= i;
         }
 
-        return n;
+        return n;//C
+	//Complejidad O(n), gracias a los iteradores.
     }
 
     /**
@@ -29,11 +32,14 @@ public class Laboratory3 {
      * @param a the int element given to be added.
      */
     public static void smartInsert(List<Integer> list, int a) {
-        if (!list.contains(a)) {
-            list.add(a);
+        if (!list.contains(a)) {//n
+            list.add(a);//A n L C
         }
+	//Complejidad, A O(n + n), L O(n)
+	//Para arreglos, O(n)
+	//Para listas, O(n)
     }
-
+    
     /**
      * Returns the index of a list where it can be split into half and the
      * values before and after the index will be the closest to one another.
@@ -41,32 +47,30 @@ public class Laboratory3 {
      * @param list the given list to be "balanced".
      * @return the index in which the list is balanced. Notice that it's the
      * limit counting from left to right. eg: [1,2,3,4,5] returns 2.
+     * returns -1 for any array of length less than 2. eg: [],[1], they can't be balanced.
      */
     public static int wherePivot(List<Integer> list) {
-        int sum1 = 0, sum2 = 0;
+        int sum1 = 0, sum2 = 0; //C
+	
+	for(int i: list)//n
+	    sum2 += i;
+	
+        int dif = sum2;//C
 
-        for (int i = 0; i < list.size(); i++) {
-            sum2 += list.get(i);
-        }
+	int idx = 0;
+	for(int x: list){//n
+	    sum2 -= x;//n*C
+	    sum1 += x;//n*C
+	    int distTemp = Math.abs(sum2 - sum1);//n*C
 
-        int dif = sum2;//Math.abs(sum2 - sum1);
-
-        int i = list.size() - 1;
-        while (i >= 0) {
-            sum1 += list.get(i);
-            sum2 -= list.get(i);
-            int dist = Math.abs(sum2 - sum1);
-
-            if (dist < dif) {
-                dif = dist;
-            } else {
-                return i;
-            }
-
-            i--;
-        }
-
-        return i;
+	    if(distTemp < dif) dif = distTemp;//n*C
+	    else break;//n*C
+	    idx++;//n*C
+	}
+	
+        return idx - 1;//C
+	//Complejidad O(n + n)
+	//O(n)
     }
     
     //NEVERAS
@@ -103,24 +107,25 @@ public class Laboratory3 {
      * @param solicitudes La cola de clientes, con sus pedidos.
      */
     public static void ejercicio4(Stack<Nevera> neveras, Queue<Solicitud> solicitudes) {
-        System.out.print("[\n");
+        System.out.print("[\n");//C
+	//n -> neveras, m -> solicitudes
+        while (!solicitudes.isEmpty()) {//m
+            Solicitud sl = solicitudes.poll();//m*C
+            int i = sl.numNeveras;//m*C
 
-        while (!solicitudes.isEmpty()) {
-            Solicitud sl = solicitudes.poll();
-            int i = sl.numNeveras;
+            System.out.print("(");//m*C
+            System.out.print(sl.nombre + ",[");//m*C
 
-            System.out.print("(");
-            System.out.print(sl.nombre + ",[");
-
-            while (i > 0 && !neveras.isEmpty()) {
-                Nevera act = neveras.pop();
-                System.out.print(act.toString() + ",");
-                i--;
+            while (i > 0 && !neveras.isEmpty()) {//m*n
+                Nevera act = neveras.pop();//m*n*C
+                System.out.print(act.toString() + ",");//m*n*C
+                i--;//m*n*C
             }
 
-            System.out.print("]),\n");
+            System.out.print("]),\n");//m*C
         }
-        System.out.print("]\n");
+        System.out.print("]\n");//C
+	//Complejidad O(m*n)
     }
     
     /**
@@ -132,24 +137,27 @@ public class Laboratory3 {
      * última posición va el último que solicitó.
      */
     public static void ejercicio4(List<Nevera> neveras, List<Solicitud> solicitudes) {
-        System.out.print("[\n");
+        System.out.print("[\n");//C
+	//n -> neveras, m-> solicitudes
+        while (!solicitudes.isEmpty()) {//m
+            Solicitud sl = solicitudes.remove(0);//A m*m L m*C
+            int i = sl.numNeveras;//C*m
 
-        while (!solicitudes.isEmpty()) {
-            Solicitud sl = solicitudes.remove(0);
-            int i = sl.numNeveras;
+            System.out.print("(");//C*m
+            System.out.print(sl.nombre + ",[");//C*m
 
-            System.out.print("(");
-            System.out.print(sl.nombre + ",[");
-
-            while (i > 0 && !neveras.isEmpty()) {
-                Nevera act = neveras.remove(neveras.size() - 1);
-                System.out.print(act.toString() + ",");
-                i--;
+            while (i > 0 && !neveras.isEmpty()) {//m*n
+                Nevera act = neveras.remove(neveras.size() - 1);//m*n*C
+                System.out.print(act.toString() + ",");//m*n*C
+                i--;//m*n*C
             }
 
-            System.out.print("]),\n");
+            System.out.print("]),\n");//m*n
         }
-        System.out.print("]\n");
+        System.out.print("]\n");//C
+	//Complejidad:
+	//ArrayList -> O(m*m + m*n)
+	//LinkedList -> O(m*n)
     }
 
     /**
@@ -161,7 +169,7 @@ public class Laboratory3 {
         LinkedList<Integer> linked = new LinkedList<>();
         linked.addAll(Arrays.asList(new Integer[]{1, 3, 5, 7}));
         ArrayList<Integer> array = new ArrayList<>();
-        array.addAll(Arrays.asList(new Integer[]{2, 4, 6, 8}));
+        array.addAll(Arrays.asList(new Integer[]{1,2,3,4,5,6,7,8,9,0,1,2,3,4,5,6,7,8,9}));
 
         // Multiply && wherePivot
         System.out.println("WHEREPIVOT Y MULTIPLY");
