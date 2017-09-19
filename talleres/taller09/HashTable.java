@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class HashTable<K, V> {
 
@@ -43,5 +44,15 @@ public class HashTable<K, V> {
 
     public void add(K key, V val) {
         table[hash(key)].add(new Pair<>(key, val));
+    }
+
+    public ArrayList<K> getKeys(){
+	ArrayList<K> arr = new ArrayList<>();
+	for(LinkedList<Pair<K,V>> l: table)
+	    if(!l.isEmpty())
+		for(Pair<K,V> p: l)
+		    arr.add(p.key);
+		    
+	return arr;
     }
 }
