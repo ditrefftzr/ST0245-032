@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Exercises{
     //EL EJERCICIO DEL TECLADO (2.1)
@@ -36,16 +37,31 @@ public class Exercises{
         return o == '[' || o == ']';
     }
 
-    public static void testKeyboard(){
+    public static void testKeyboard() throws IOException{
+	//Este es el metodo que pasa en el juez, sin embargo, para el input usual no sirve.
+	//Por eso, en el main usaremos testKeyboard2()
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        PrintWriter pw = new PrintWriter(System.out);
+	String s;
+	while ((s = br.readLine()) != null && !s.equals("")) {
+	    brokenKeyboard(s).forEach((str) -> {
+		    pw.print(str);
+	    });
+	    pw.println();
+	    pw.flush();
+	}
+	pw.close();
+    }
+
+    public static void testKeyboard2(){
 	Scanner sc = new Scanner(System.in);
-        String line = sc.nextLine();
-        sc = new Scanner(line);
-        while(sc.hasNext()){
-            brokenKeyboard(sc.next()).forEach((str) -> {
-                System.out.print(str);
-            });
-            System.out.println();
-        }
+	String str;
+	while(!(str = sc.nextLine()).equals("")){
+	    brokenKeyboard(str).forEach((s) -> {
+		    System.out.print(s);
+		});
+	    System.out.println();
+	}
     }
     
     //EL EJERCICIO DE CODEFORCES
@@ -76,9 +92,9 @@ public class Exercises{
         }
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         System.out.println("PRUEBA BROKENKEYBOARD");
-	testKeyboard();
+	testKeyboard2();
 	System.out.println("PRUEBA CODEFORCES");
 	codeForcesChallenge();
     }

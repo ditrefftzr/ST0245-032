@@ -1,6 +1,10 @@
 import java.util.*;
 
 /**
+ * Class of the Laboratory 3, learning how to work with ArrayLists 
+ * and LinkedLists, and to identify the differences between them and the 
+ * advantages/weaknesses of each one.
+ *
  * @author agusn, ditrefftzr
  */
 public class Laboratory3 {
@@ -162,8 +166,10 @@ public class Laboratory3 {
 
     /**
      * Tests the methods.
+     * It doesn't have user interaction, but was useful for knowing wether the code works 
+     * well or it doesn't.
      *
-     * @param args Nothing.
+     * @param args Nothing: No user interaction.
      */
     public static void main(String[] args) {
         LinkedList<Integer> linked = new LinkedList<>();
