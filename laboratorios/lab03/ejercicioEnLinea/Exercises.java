@@ -65,37 +65,40 @@ public class Exercises{
     }
     
     //EL EJERCICIO DE CODEFORCES
-    public static void codeForcesChallenge(){
-        Scanner sc = new Scanner(System.in);
-
-        String s = sc.next();
-
-	int[] acum = new int[s.length()];
-        acum[0] = 0;
-        for(int i=1; i<acum.length; i++){
-	    acum[i] = acum[i-1];
-	    if(s.charAt(i) == s.charAt(i-1))
-		acum[i]++;
-	}
-
-	// for(int i: acum)
-	//     System.out.print(i);
-
-        int n = sc.nextInt();
-
-        while(n > 0){
-            int l = sc.nextInt() - 1;
-            int r = sc.nextInt() - 1;
-
-            System.out.println(acum[r] - acum[l]);
-            n--;
+     public static void queries() {
+        int li = 0;
+        int ri = 0;
+        Scanner input = new Scanner(System.in);
+        String s = input.next();
+        // Create acum array
+        int acum = 0;
+        int [] acumArray = new int[s.length()];
+        for(int i = 0; i < s.length() - 1; i++) {
+            if(s.charAt(i) == s.charAt(i+1)) {
+                acum++;
+            }
+            acumArray[i+1] = acum;
+        }
+        System.out.println(Arrays.toString(acumArray));
+        int m = input.nextInt();
+        for(int i = 1; i <= m; i++) {
+            li = input.nextInt();
+            ri = input.nextInt();
+            int dif = acumArray[ri-1] - acumArray[li-1];
+            System.out.println(dif);
         }
     }
+    
+    public static void main(String [] args) {
+        queries2();
+    }
+}
+
     
     public static void main(String[] args) throws IOException{
         System.out.println("PRUEBA BROKENKEYBOARD");
 	testKeyboard2();
 	System.out.println("PRUEBA CODEFORCES");
-	codeForcesChallenge();
+	queries();
     }
 }
