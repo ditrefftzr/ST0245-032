@@ -64,32 +64,24 @@ public class Exercises{
 	}
     }
     
-    //EL EJERCICIO DE CODEFORCES
-    public static void codeForcesChallenge(){
-        Scanner sc = new Scanner(System.in);
-
-        String s = sc.next();
-
-	int[] acum = new int[s.length()];
-        acum[0] = 0;
-        for(int i=1; i<acum.length; i++){
-	    acum[i] = acum[i-1];
-	    if(s.charAt(i) == s.charAt(i-1))
-		acum[i]++;
-	}
-
-	// for(int i: acum)
-	//     System.out.print(i);
-
-        int n = sc.nextInt();
-
-        while(n > 0){
-            int l = sc.nextInt() - 1;
-            int r = sc.nextInt() - 1;
-
-            System.out.println(acum[r] - acum[l]);
-            n--;
-        }
+    //EL EJERCICIO DE CODEFORCE
+    public static void queries() {
+        Scanner input = new Scanner(System.in) ;
+        String s = input.next() ;
+        int m = input.nextInt() ;
+        int li ; 
+        int ri ; 
+        for (int i=0; i<m ; i++){
+            li = input.nextInt() ;
+            ri = input.nextInt() ;
+            int cont = 0 ;
+            for (int j=li ; j<ri ; j++){
+                 if (s.charAt(j-1)==s.charAt(j)){
+                     cont ++ ;
+                 }
+            }
+            System.out.println(cont);
+        }   
     }
     
     public static void main(String[] args) throws IOException{
