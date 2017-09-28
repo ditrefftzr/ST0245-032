@@ -1,5 +1,4 @@
 /**
- *
  * @author anietog1, ditrefftzr
  */
 public class File {
@@ -29,6 +28,6 @@ public class File {
 
     @Override
     public String toString() {
-        return this.name + "[" + this.size + "]";
+        return this.name + " [" + this.size + "bytes]";
     }
 }
