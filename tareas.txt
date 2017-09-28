@@ -1,31 +1,33 @@
 ENTREGA 02
 
 TAREAS:
-a,b -> Palabritas.
+-------------------------------------------------
+DAVID:
 c -> Intro, Probl, Similares, Gráficas, Refs.
-d -> Diseño de la estructura y graficarla.
-e -> Diseño de operaciones.
-f -> Calculo de complejidades.
 g -> Criterios de seleccion.
+l -> Diapositivas pdf.
+-------------------------------------------------
+AGUSTIN:
+a,b -> Palabritas.
+f -> Calculo de complejidades. --> Agregar al informe
 h -> Calcular tiempos de ejecucion.
-[i -> Teamwork]
-
 |EN ZIP|{
   j -> Solucion al problema.
   k -> Docs HTML
 }
-
-l -> Diapositivas pdf.
-
-David:
-
-
-Agustin:
-
-
+-------------------------------------------------
+GRUPALES: Agustin diseña, David grafica.
+d -> Diseño de la estructura y graficarla.
+e -> Diseño de operaciones.
+-------------------------------------------------
 /**
+ * OPERACIONES:
  * Anadir
  * Busqueda
  * Listar
  * Pasear
-*/
+ * Remover
+ * Modificar
+ */
+
+Se necesita implementar librerías propias, posibilidad de "cd .." y listado.
