@@ -53,7 +53,7 @@ public class Folder extends File {
      *
      * @param amount The amount to be actualized.
      */
-    private void actSizes(int amount) {
+    private void actSizes(long amount) {
         this.changeSize(amount);
 
         if (this.parent != null) {

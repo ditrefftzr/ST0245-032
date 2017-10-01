@@ -6,7 +6,7 @@
 public class File {
 
     private String name;
-    private int size;
+    private long size;
 
     /**
      * Builds a new File with name <code>name</code> and size <code>size</code>.
@@ -15,7 +15,7 @@ public class File {
      * @param size The size of the File.
      * @throws java.lang.Exception if tried to make a file with a negative size.
      */
-    public File(String name, int size) throws Exception {
+    public File(String name, long size) throws Exception {
         if(size < 0) throw new Exception("File with negative size " + size);
         this.name = name;
         this.size = (size<=0)? 0:size;
@@ -45,7 +45,7 @@ public class File {
      *
      * @return The size of this File.
      */
-    public int getSize() {
+    public long getSize() {
         return this.size;
     }
 
@@ -64,7 +64,7 @@ public class File {
      * @param amount How much the size of this size changed, it can also be
      * negative values.
      */
-    public void changeSize(int amount) {
+    public void changeSize(long amount) {
         this.size += amount;
     }
 
