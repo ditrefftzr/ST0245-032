@@ -1,0 +1,49 @@
+/**
+ * Class where the queues of people will be sorted in the correct order
+ *
+ * David Trefftz, Agustin Nieto
+ * 1.0
+ */
+import java.util.LinkedList;
+public class Banco
+{
+    public LinkedList<String> fila ;
+    public LinkedList<String>[] filas ;
+    public int cajeros ;
+
+    /**
+     * Simulates introducing every element of an array of queues in one of two cashiers.
+     */
+    public static void simular(LinkedList<String>[] filas){
+        int i = 0 ;
+        do{
+            /**
+             * if i exceeds the amount of queues, i´ts value is set to 0.
+             */
+            if(i>3){
+                i = 0 ;
+            }
+
+            /**
+             *  Checks if there is an item available in the selected queue and removes the first item of the queue.
+             */
+            if (!filas[i].isEmpty()){
+                String s = filas[i].poll() ;
+                System.out.println("El sujeto " + s + " está ubicado en el cajero " + (((i+1)%2)+1)); 
+            }
+            i++ ;
+        } while (clientela(filas)) ; 
+    }
+
+    /**
+     * Checks if the array of queues still has any items left.
+     */
+    public static boolean clientela(LinkedList<String>[] filas){
+        for(int i = 0 ; i< filas.length ; i++){
+            if(!filas[i].isEmpty()){
+                return true ;
+            }
+        }
+        return false ;
+    }
+}
