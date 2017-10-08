@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Banco
 {
     public LinkedList<String> fila ;
-    public LinkedList<String>[] filas ;
+    public LinkedList[] filas ;
     public int cajeros ;
 
     /**
@@ -17,6 +17,12 @@ public class Banco
     public static void simular(LinkedList<String>[] filas){
         int i = 0 ;
         do{
+            /**
+             * if i exceeds the amount of queues, i´ts value is set to 0.
+             */
+            if(i>3){
+                i = 0 ;
+            }
 
             /**
              *  Checks if there is an item available in the selected queue and removes the first item of the queue.
@@ -26,7 +32,6 @@ public class Banco
                 System.out.println("El sujeto " + s + " está ubicado en el cajero " + (((i+1)%2)+1)); 
             }
             i++ ;
-            i%= 4 ;
         } while (clientela(filas)) ; 
     }
 
@@ -40,5 +45,28 @@ public class Banco
             }
         }
         return false ;
+    }
+    /**
+    *  Tests the methods of the class Banco.
+    */
+    public static void main (String [] args){
+          LinkedList<String> [] filasClientes = new LinkedList[4];
+        filasClientes[0] = new LinkedList<>();
+        filasClientes[1] = new LinkedList<>();
+        filasClientes[2] = new LinkedList<>();
+        filasClientes[3] = new LinkedList<>();
+        
+        filasClientes[0].add("Abelardo");
+        filasClientes[0].add("Alberto");
+        
+        filasClientes[1].add("Bernardo");
+        filasClientes[1].add("Benedicto");
+        filasClientes[1].add("Betania");
+        
+        filasClientes[2].add("Camilo");
+        filasClientes[2].add("Cassidy");
+        
+        filasClientes[3].add("Danilo");
+        simular(filasClientes) ;
     }
 }
