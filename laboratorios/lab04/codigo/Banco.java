@@ -1,3 +1,4 @@
+
 /**
  * Class where the queues of people will be sorted in the correct order
  *
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 public class Banco
 {
     public LinkedList<String> fila ;
-    public LinkedList<String>[] filas ;
+    public LinkedList[] filas ;
     public int cajeros ;
 
     /**
@@ -16,16 +17,21 @@ public class Banco
      */
     public static void simular(LinkedList<String>[] filas){
         int i = 0 ;
+        int cajero = 0 ;
         do{
+
             /**
              *  Checks if there is an item available in the selected queue and removes the first item of the queue.
              */
+            
             if (!filas[i].isEmpty()){
                 String s = filas[i].poll() ;
-                System.out.println("El sujeto " + s + " está ubicado en el cajero " + (((i+1)%2)+1)); 
+                System.out.println("El sujeto " + s + " está ubicado en el cajero " + (cajero+1));
+                cajero ++;
+                cajero%=2;
             }
-            i++ ;
-            i%=4;
+            i++  ;
+            i%=4 ;
         } while (clientela(filas)) ; 
     }
 
@@ -40,9 +46,7 @@ public class Banco
         }
         return false ;
     }
-    /**
-    *  Tests the methods of the class Banco.
-    */
+    
     public static void main (String [] args){
           LinkedList<String> [] filasClientes = new LinkedList[4];
         filasClientes[0] = new LinkedList<>();
@@ -56,6 +60,7 @@ public class Banco
         filasClientes[1].add("Bernardo");
         filasClientes[1].add("Benedicto");
         filasClientes[1].add("Betania");
+        filasClientes[1].add("Brujilda") ;
         
         filasClientes[2].add("Camilo");
         filasClientes[2].add("Cassidy");
