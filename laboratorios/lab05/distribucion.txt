@@ -1,0 +1,20 @@
+1.1 BinaryTree que permita almacenar ancestros.
+1.2 Implementar buscar, tamaño, altura e imprimir recursivamente. Probar en main.
+1.3 Implementar metodo que obtenga la abuela materna de una persona.
+2.1 Ejercicio preorden vs postorden.
+2.2 Ejercicio en UVa. [Opcional]
+3.1 Investigar árboles genealógicos y construirlos.
+3.2 Responder: Se puede implementar árbol genealógico con O(log n)?
+3.3 Explicar 2.1 + 2.2
+3.4 Complejidad 2.1 + 2.2
+3.5 Qué es n | m ?
+4(1-6) Grupal (Simulacro parcial)
+
+PROPUESTA DISTRIBUCIÓN
+
+1. -> Eso fue un taller, ya está casi hecho: AGUSTÍN
+2. 1. David
+   2. [Agustín] Opcional.
+3. 1. Ambos.
+   2. Ambos y debatir.
+   (3-5) Quien lo hizo.
