@@ -36,7 +36,8 @@ public class Loader {
 
         jumpBlanks();
         Folder home = new Folder(br.readLine().split("/")[0], null);
-
+	files.add(home);
+	
         jumpBlanks();
         calcLvl();
         loadTo(home, currLvl);

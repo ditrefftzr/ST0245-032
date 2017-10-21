@@ -7,7 +7,7 @@ public class Tests {
         Loader loader = new Loader("C:\\Users\\agusn\\Desktop/juegos.txt");
         FileStructure a = loader.load();
 
-        LinkedList<File> b = a.get("dolphin-emu.mo");
+        LinkedList<File> b = a.get("Emulators-Roms");
         b.forEach((x) -> {
             System.out.println(x.getPath());
         });
