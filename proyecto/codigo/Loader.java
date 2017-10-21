@@ -1,55 +1,47 @@
-import java.util.*;
 import java.io.*;
+import java.util.Stack;
 
 /**
- * The class FPRead is the Final Project Reader class which onliest job is to
- * read the file which containes the filestree and make a Folder with the same
- * specifications.
+ * The class Loader is the class which onliest job is to read the file which
+ * containes the filestree and make a Folder with the same specifications.
  *
  * @author anietog1, kaparrah
  */
-public class FPRead {
+public class Loader {
 
     private BufferedReader br;
     private int calls;
     private int curr;
     private int currLvl;
+    private FileStructure files;
 
     /**
-     * Creates a new Final Project Reader which onliest job is to read a file
-     * and return a Folder $HOME from it.
+     * Creates a new Loader which onliest job is to read a file and return a
+     * Folder $HOME from it.
      *
      * @param filename The name of the file which contains the data - e.g.
      * ejemplito.txt
      * @throws FileNotFoundException if a file with filename doesn't exist.
      */
-    public FPRead(String filename) throws FileNotFoundException {
+    public Loader(String filename) throws FileNotFoundException {
         br = new BufferedReader(new FileReader(filename));
+        files = new FileStructure();
         calls = 0;
     }
 
-    /**
-     * Makes a Folder $HOME from the given filename in the constructor, remember
-     * this method will only work once and the grammar of the filetree has to be
-     * the same shown in ejemplito.txt/juegos.txt, found at:
-     *
-     * https://github.com/mauriciotoro/ST0245-Eafit/tree/master/proyecto/DataSets
-     *
-     * @return @throws IOException
-     */
-    public Folder load() throws IOException {
+    public FileStructure load() throws IOException {
         if (calls++ > 0) {
             return null;
         }
 
         jumpBlanks();
-        Folder home = new Folder(br.readLine());
+        Folder home = new Folder(br.readLine().split("/")[0], null);
 
         jumpBlanks();
         calcLvl();
         loadTo(home, currLvl);
 
-        return home;
+        return files;
     }
 
     private boolean isDigit(int a) {
@@ -68,26 +60,26 @@ public class FPRead {
     }
 
     private void loadTo(Folder fold, int fLvl) throws IOException {
-        Stack<File> files = new Stack<>();
+        Stack<File> inners = new Stack<>();
 
         while (!isDigit(curr)) {
             calcLvl();
 
             if (currLvl == fLvl) {
-                files.push(make());
+                inners.push(makeFor(fold));
                 jumpBlanks();
             } else if (currLvl > fLvl) {
-                File temp = files.pop();
-                Folder child = new Folder(temp.getName());
+                File temp = inners.pop();
+                Folder child = new Folder(temp.getName(), temp.getParent());
                 loadTo(child, currLvl);
-                files.push(child);
+                inners.push(child);
             } else {//<
                 break;
             }
         }
 
-        while (!files.isEmpty()) {
-            fold.add(files.pop());
+        while (!inners.isEmpty()) {
+            files.add(inners.pop());
         }
     }
 
@@ -98,9 +90,9 @@ public class FPRead {
         br.reset();
     }
 
-    private File make() throws IOException {
+    private File makeFor(Folder fold) throws IOException {
         while (br.read() != ']');//Can bug if called from "]"
         jumpBlanks();
-        return new File(br.readLine());
+        return new File(br.readLine(), fold);
     }
 }

@@ -1,41 +1,55 @@
 /**
- * Class specifying the most important aspects of a File.
+ * New aproach for making a File, this time every File knows in which Folder it
+ * is, and it's name, because for making search by name it's unnecessary to save
+ * the other data.
  *
- * @author anietog1, ditrefftzr
+ * @author agusn
  */
 public class File {
 
-    private String name;
+    private final String name;
+    private final Folder parent;
 
     /**
-     * Makes a new File with the given parameters (specifications).
+     * Builds a new File with the given name and the given folder.
      *
-     * @param name The name this File is going to have.
+     * @param name The name of the file.
+     * @param parent The folder inside which this file is.
      */
-    public File(String name) {
+    public File(String name, Folder parent) {
         this.name = name;
+        this.parent = parent;
     }
 
     /**
-     * Returns the name of this File.
+     * Indicates the path from home of the current File, home must be the
+     * onliest Folder without a parent.
      *
-     * @return The name field of this File.
+     * @return The path from home of the current File.
+     */
+    public String getPath() {
+        if (parent == null) {
+            return name;
+        }
+
+        return parent.getPath() + name;
+    }
+
+    /**
+     * The given name of the File.
+     *
+     * @return The name of the File.
      */
     public String getName() {
-        return this.name;
+        return name;
     }
 
     /**
-     * Changes the <code>name</code> attribute of this File.
+     * Indicates in which Folder this File is in.
      *
-     * @param name The new name this File is going to have.
+     * @return The parent of the File.
      */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
+    public Folder getParent() {
+        return parent;
     }
 }
