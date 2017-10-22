@@ -1,35 +1,35 @@
-public class Node
-{
-    public Node left;
-    public Node right;
-    public int value;
-    
-    public boolean add(int value) {
-            if (value == this.value)
-                  return false;
-            else if (value <this.value) {
-                  if (left == null) {
-                        left = new Node(value);
-                        return true;
-                  } else
-                        return left.add(value);
-            } else if (value > this.value) {
-                  if (right == null) {
-                        right = new Node(value);
-                        return true;
-                  } else
-                        return right.add(value);
-            }
-            return false;
-      }
-
-    public Node(int element) {
-        this.value = element;
-    }
-}
-
 public class BTree
 {
+    public class Node
+    {
+	public Node left;
+	public Node right;
+	public int value;
+    
+	public boolean add(int value) {
+	    if (value == this.value)
+		return false;
+	    else if (value <this.value) {
+		if (left == null) {
+		    left = new Node(value);
+		    return true;
+		} else
+		    return left.add(value);
+	    } else if (value > this.value) {
+		if (right == null) {
+		    right = new Node(value);
+		    return true;
+		} else
+		    return right.add(value);
+	    }
+	    return false;
+	}
+
+	public Node(int element) {
+	    this.value = element;
+	}
+    }
+
     public Node root;
 
     public void printPostOrder(){
