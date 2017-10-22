@@ -158,18 +158,18 @@ public class AncestorTree {
         
         //ARBOL DE DAVID
         AncestorTree trestrepo = new AncestorTree("david");
-        trestrepo.get("david").mother = new Person("");
+        trestrepo.get("david").mother = new Person("gloria");
         trestrepo.get("david").father = new Person("helmuth");
 
-        trestrepo.get("").mother = new Person("");
-        trestrepo.get("").father = new Person("");
+        trestrepo.get("gloria").mother = new Person("yolanda");
+        trestrepo.get("gloria").father = new Person("ricardo");
 
-        trestrepo.get("").mother = new Person("");
-        trestrepo.get("").father = new Person("");
+        trestrepo.get("helmuth").mother = new Person("olga");
+        trestrepo.get("helmuth").father = new Person("helmuth");
         
         System.out.println(trestrepo.size());
         System.out.println(trestrepo.height());
-        System.out.println(trestrepo.getGrandMothersName("agustin"));
+        System.out.println(trestrepo.getGrandMothersName("david"));
         trestrepo.print();
     }
 }
