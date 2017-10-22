@@ -165,11 +165,11 @@ public class AncestorTree {
         trestrepo.get("gloria").father = new Person("ricardo");
 
         trestrepo.get("helmuth").mother = new Person("olga");
-        trestrepo.get("helmuth").father = new Person("helmut");
+        trestrepo.get("helmuth").father = new Person("helmuth");
         
         System.out.println(trestrepo.size());
         System.out.println(trestrepo.height());
-        System.out.println(trestrepo.getGrandMothersName("agustin"));
+        System.out.println(trestrepo.getGrandMothersName("david"));
         trestrepo.print();
     }
 }
