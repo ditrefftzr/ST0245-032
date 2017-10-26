@@ -1,0 +1,48 @@
+Agus [b, d, e, a, h]
+
+Grupal[c, f, h]
+
+David [c, e, g, h, a] &| corregir documentación
+-------------------------------------------------------------
+a. Resumen
+   ¿Cuál es el problema?
+   ¿Por qué es importante el problema?
+   ¿Qué problemas relacionados hay?
+   ¿Cuál es la solución?
+   ¿Cuáles son los resultados?
+   ¿Cuáles las conclusiones?
+   Utilizar máximo 200 palabras.
+   
+b. Todo lo que hicieron en la Entrega 1 y Entrega 2:
+   Introducción
+   Problema
+   Problemas Similares
+   Gráficas, Referencias
+   -------------------
+   Palabras claves del autor
+   Palabras claves de la ACM
+   Estructura de Datos Principal
+   Resultados obtenidos
+
+c. Diseño de la estructura.
+   Expliquen la nueva estructura de datos, tal y como lo hicieron en el
+   	     numeral d) de la Segunda Entrega
+
+d. Complejidades.
+   Cálculo de operaciones en el peor caso.
+
+e. Criterios de diseño.
+   ¿Por qué?
+
+f. Resultados obtenidos de la solución final.
+   Calcular,
+	(I) el tiempo de ejecución
+	(II) la memoria usada para las operaciones de la n eva estructura de datos
+
+	para el Conjunto de Datos que está en el ZIP
+
+g. Conclusiones.
+   [Dirigirse a la guía]
+
+h. Agradecimientos.
+   [Dirigirse a la guía]
