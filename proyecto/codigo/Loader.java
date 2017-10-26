@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Stack;
 
 /**
@@ -9,11 +12,11 @@ import java.util.Stack;
  */
 public class Loader {
 
-    private BufferedReader br;
+    private final BufferedReader br;
     private int calls;
     private int curr;
     private int currLvl;
-    private FileStructure files;
+    private final FileStructure files;
 
     /**
      * Creates a new Loader which onliest job is to read a file and return a
@@ -29,24 +32,24 @@ public class Loader {
         calls = 0;
     }
 
+    /**
+     *
+     * @return @throws IOException
+     */
     public FileStructure load() throws IOException {
         if (calls++ > 0) {
             return null;
         }
 
         jumpBlanks();
-        Folder home = new Folder(br.readLine().split("/")[0], null);
-	files.add(home);
-	
+        while (!isLetter(curr = br.read()));
+        Folder home = new Folder((char) curr + br.readLine().split("/")[0], null, "");
+
         jumpBlanks();
         calcLvl();
         loadTo(home, currLvl);
 
         return files;
-    }
-
-    private boolean isDigit(int a) {
-        return a >= '0' && a <= '9';
     }
 
     private void calcLvl() throws IOException {
@@ -60,10 +63,29 @@ public class Loader {
         }
     }
 
+    private boolean isLetter(int curr) {
+        return (curr >= 'A' && curr <= 'Z') || (curr >= 'a' && curr <= 'z');
+    }
+
+    private boolean isBlank(int curr) {
+        return curr == ' ' || curr == '\n' || curr == '\t';
+    }
+
+    private boolean isDouble(int curr) {
+        return (curr >= '0' && curr <= '9') || curr == '.';
+    }
+
+    private void jumpBlanks() throws IOException {
+        do {
+            br.mark(1);
+        } while (isBlank(curr = br.read()));
+        br.reset();
+    }
+
     private void loadTo(Folder fold, int fLvl) throws IOException {
         Stack<File> inners = new Stack<>();
 
-        while (!isDigit(curr)) {
+        while (!isDouble(curr) && curr != -1) {
             calcLvl();
 
             if (currLvl == fLvl) {
@@ -71,7 +93,7 @@ public class Loader {
                 jumpBlanks();
             } else if (currLvl > fLvl) {
                 File temp = inners.pop();
-                Folder child = new Folder(temp.getName(), temp.getParent());
+                Folder child = new Folder(temp.getName(), temp.getParent(), temp.getUser());
                 loadTo(child, currLvl);
                 inners.push(child);
             } else {//<
@@ -82,18 +104,47 @@ public class Loader {
         while (!inners.isEmpty()) {
             files.add(inners.pop());
         }
+
+        //files.add(fold); if uncommented, added twice :vvvv
     }
 
-    private void jumpBlanks() throws IOException {
-        do {
-            br.mark(1);
-        } while ((curr = br.read()) == ' ' || curr == '\n' || curr == '\t');
-        br.reset();
+    private long calcSize(String numbers, int modifier) {
+        double num = Double.parseDouble(numbers);
+        long ret = (long) num;
+
+        switch (modifier) {
+            case 'M':
+                ret *= 1024 * 1024;
+                break;
+            case 'K':
+                ret *= 1024;
+                break;
+        }
+
+        return ret;
     }
 
     private File makeFor(Folder fold) throws IOException {
-        while (br.read() != ']');//Can bug if called from "]"
+        //don't need to go til '[' cuz already in there
+        StringBuilder temp = new StringBuilder();
+        while (!isBlank(curr = br.read())) {//getting the user
+            temp.append((char) curr);
+        }
+
+        String user = temp.toString();
+
         jumpBlanks();
-        return new File(br.readLine(), fold);
+
+        temp = new StringBuilder();
+        //next, get the size
+        while (isDouble(curr = br.read())) {
+            temp.append((char) curr);
+        }
+
+        long size = calcSize(temp.toString()/*digits + '.'*/, curr /*modifier*/);
+        br.read();//']'
+        jumpBlanks();
+
+        return new File(br.readLine(), fold, size, user);
     }
 }

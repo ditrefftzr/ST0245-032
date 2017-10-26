@@ -4,18 +4,24 @@
  * just like any other File, except that for being a parent of any File, it has
  * to be a Folder.
  *
- * @author anietog1
+ * @author agusn
  */
 public class Folder extends File {
+
+    /**
+     * Folders always have same size of 4K in the given datasets.
+     */
+    private static final long FOLD_SIZE = 4L * 1024;
 
     /**
      * Builds a new Folder with the given name and inside the given Folder.
      *
      * @param name The name of the Folder.
      * @param parent The Folder inside which this Folder is.
+     * @param user The Folder's user.
      */
-    public Folder(String name, Folder parent) {
-        super(name, parent);
+    public Folder(String name, Folder parent, String user) {
+        super(name, parent, FOLD_SIZE, user);
     }
 
     @Override
