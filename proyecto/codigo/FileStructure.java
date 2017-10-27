@@ -8,7 +8,8 @@ import java.util.TreeSet;
  * extension, user and parent Folder with a O(log(n)) complexity. Searches are
  * always made from HOME, but as it's O(log(n)), even if there are 10^24 (1
  * billion squared) Files, finding one in the given categories would just take
- * 80-82 operations.
+ * 80-82 operations. The structure is made in a way that HOME's path is "" and
+ * every Folder with a null parent is always going to be directly inside HOME.
  *
  * @author anietog1, ditrefftzr
  */
@@ -19,7 +20,8 @@ public class FileStructure {
     private final TreeMap<String, LinkedList<File>> byExt;
     private final TreeMap<String, LinkedList<File>> byUser;
     private final TreeMap<String, TreeSet<File>> byFolder;
-    private long size;
+    private long nFolders;
+    private long nFiles;
 
     /**
      * Builds a new FileStructure.
@@ -30,7 +32,8 @@ public class FileStructure {
         byExt = new TreeMap<>();
         byUser = new TreeMap<>();
         byFolder = new TreeMap<>();
-        size = 0;
+        nFolders = 0;
+        nFiles = 0;
     }
 
     /**
@@ -105,8 +108,7 @@ public class FileStructure {
     }
 
     /**
-     * Searches all the Files inside the Folder with the given path. The grammar
-     * for paths is HOME/[foldername/...]
+     * Searches all the Files with the given Folder as their parent.
      *
      * @param folder The searched Folder.
      * @return All the files with the given Folder as it's parent, null if
@@ -119,7 +121,7 @@ public class FileStructure {
 
     /**
      * Searches all the Files inside the Folder with the given path. The grammar
-     * for paths is HOME/[foldername/...]
+     * for paths is [foldername/...]. HOME path is "".
      *
      * @param path The path of the searched Folder.
      * @return All the files in the Folder with the given path, null if there's
@@ -133,7 +135,8 @@ public class FileStructure {
      * Adds the given File if not repeated to all the trees in this class,
      * allowing to search it with complexity O(log(n)) (n being the number of
      * Files in the FileStructure) by name, size, extension, user and its parent
-     * folder's path.
+     * folder's path. It's allowed to insert a File without parent, then it's
+     * parent is HOME, with path "".
      *
      * @param file The File to be added.
      * @return true if file added else false.
@@ -141,7 +144,7 @@ public class FileStructure {
     public boolean add(File file) {
         if (file == null
                 || file.getName() == null
-                || file.getParent() == null
+                || file.getName().length() == 0
                 || file.getUser() == null
                 || file.getSize() < 0L
                 || !addByFolder(file)) {
@@ -153,12 +156,26 @@ public class FileStructure {
         addBySize(file);
         addByExt(file);
         addByUser(file);
-        ++size;
+
+        if (file instanceof Folder) {
+            nFolders++;
+        } else {
+            nFiles++;
+        }
+
         return true;
     }
 
     private boolean addByFolder(File file) {
-        String path = file.getParent().getPath();
+        Folder parent = file.getParent();
+        String path;
+
+        if (parent == null) {
+            path = "";
+        } else {
+            path = parent.getPath();
+        }
+
         TreeSet<File> curr = getByFolder(path);
 
         if (curr == null) {
@@ -226,9 +243,22 @@ public class FileStructure {
 
     /**
      *
+     * The nFiles field of this FileStructure contains the number of Files (not
+     * Folders) added to the Structure.
+     *
      * @return The number of Files in this FileStructure.
      */
-    public long getSize() {
-        return size;
+    public long nFiles() {
+        return nFiles;
+    }
+
+    /**
+     * The nFolders field of this FileStructure contains the number of Folders
+     * added to the Structure.
+     *
+     * @return the number of Folders this structure contains.
+     */
+    public long nFolders() {
+        return nFolders;
     }
 }

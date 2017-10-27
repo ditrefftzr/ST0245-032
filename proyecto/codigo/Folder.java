@@ -14,7 +14,8 @@ public class Folder extends File {
     private static final long FOLD_SIZE = 4L * 1024;
 
     /**
-     * Builds a new Folder with the given name and inside the given Folder.
+     * Builds a new Folder with the given caracteristics and inside the given
+     * Folder.
      *
      * @param name The name of the Folder.
      * @param parent The Folder inside which this Folder is.
@@ -22,6 +23,19 @@ public class Folder extends File {
      */
     public Folder(String name, Folder parent, String user) {
         super(name, parent, FOLD_SIZE, user);
+    }
+
+    /**
+     * Builds a new Folder with the given caracteristics and inside the given
+     * Folder.
+     *
+     * @param name The name of the Folder.
+     * @param parent The Folder inside which this Folder is.
+     * @param size The size of the Folder.
+     * @param user The Folder's user.
+     */
+    public Folder(String name, Folder parent, long size, String user) {
+        super(name, parent, size, user);
     }
 
     @Override
