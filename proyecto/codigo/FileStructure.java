@@ -4,9 +4,9 @@ import java.util.SortedMap;
 import java.util.TreeSet;
 
 /**
- * FileStructure class allows to insert Files and search them by name, size,
+ * FileStructure class allows the user to insert Files and search them by name, size,
  * extension, user and parent Folder with a O(log(n)) complexity. Searches are
- * always made from HOME, but as it's O(log(n)), even if there are 10^24 (1
+ * always made from HOME, but because the complexity is O(log(n)), even if there are 10^24 (1
  * billion squared) Files, finding one in the given categories would just take
  * 80-82 operations. The structure is made in a way that HOME's path is "" and
  * every Folder with a null parent is always going to be directly inside HOME.
@@ -39,9 +39,9 @@ public class FileStructure {
     /**
      * Searches for all Files with the given name.
      *
-     * @param name The name of the Files searched.
-     * @return A LinkedList with all the Files with the given name, null if not
-     * a File with that name.
+     * @param name The name of the File(s) searched.
+     * @return A LinkedList with all the Files with the given name, returns null if there isn´t 
+     *  a file with that name.
      */
     public LinkedList<File> getByName(String name) {
         return byName.get(name);
@@ -51,19 +51,19 @@ public class FileStructure {
      * Searches for all Files with the given size.
      *
      * @param size The searched size.
-     * @return A LinkedList
+     * @return A LinkedList with all the files with the given size.
      */
     public LinkedList<File> getBySize(Long size) {
         return bySize.get(size);
     }
 
     /**
-     * Returns a SortedMap representing the part of the Tree with size less than
-     * or equal to the given one.
+     * Returns a SortedMap representing the part of the Tree wich has less
+     * or equal size than the given size.
      *
-     * @param size The max size of File searched.
+     * @param size The maximum size of files to be returned.
      * @return A SortedMap with all the Files with sizes equal to or less than
-     * the given one.
+     * the given size.
      *
      * For more information, see SortedMap.headMap(K, bool)
      */
@@ -73,11 +73,11 @@ public class FileStructure {
 
     /**
      * Returns a SortedMap representing the part of the Tree with size higher
-     * than or equal to the given one.
+     * than or equal to the given size.
      *
-     * @param size The minimun size of File searched.
+     * @param size The minimun size of all Files searched.
      * @return A SortedMap with all the Files with sizes equal to or higher than
-     * the given one.
+     * the given size.
      *
      * For more information, see SortedMap.tailMap(K, bool)
      */
@@ -87,21 +87,21 @@ public class FileStructure {
 
     /**
      * Searches for all the Files with the given extension, the extension has to
-     * be without the dot, and its found in Files as: [filename].[ext].
+     * be written without the dot, and it´s found in Files as: [filename].[ext].
      *
      * @param ext The extension of the searched Files.
-     * @return A LinkedList with all Files with extension ext, null if there's
-     * not a File with that extension.
+     * @return A LinkedList with all Files with extension ext, returns null if there's
+     * no File with that extension.
      */
     public LinkedList<File> getByExt(String ext) {
         return byExt.get(ext);
     }
 
     /**
-     * Searches for all Files with the given username.
+     * Searches for all Files with the given user.
      *
-     * @param user The user of the Files.
-     * @return All the Files with the given user, null if not such user.
+     * @param user The file´s username.
+     * @return A linked list with all the Files with the given user, returns null if the username doesn´t exist.
      */
     public LinkedList<File> getByUser(String user) {
         return byUser.get(user);
@@ -111,7 +111,7 @@ public class FileStructure {
      * Searches all the Files with the given Folder as their parent.
      *
      * @param folder The searched Folder.
-     * @return All the files with the given Folder as it's parent, null if
+     * @return All the files with the given Folder as it's parent, returns null if
      * there's no File with the given Folder as its parent or the given Folder
      * doesn't exists.
      */
@@ -123,23 +123,23 @@ public class FileStructure {
      * Searches all the Files inside the Folder with the given path. The grammar
      * for paths is [foldername/...]. HOME path is "".
      *
-     * @param path The path of the searched Folder.
-     * @return All the files in the Folder with the given path, null if there's
-     * not such Folder.
+     * @param path The path for the searched Folder.
+     * @return All the files in the Folder with the given path, returns null if there's
+     * no existent path with that name.
      */
     public TreeSet<File> getByFolder(String path) {
         return byFolder.get(path);
     }
 
     /**
-     * Adds the given File if not repeated to all the trees in this class,
+     * Adds the given File (if not repeated) to all the trees in this class,
      * allowing to search it with complexity O(log(n)) (n being the number of
      * Files in the FileStructure) by name, size, extension, user and its parent
      * folder's path. It's allowed to insert a File without parent, then it's
      * parent is HOME, with path "".
      *
      * @param file The File to be added.
-     * @return true if file added else false.
+     * @return true if file added else returns false.
      */
     public boolean add(File file) {
         if (file == null
