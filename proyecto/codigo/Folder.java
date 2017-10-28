@@ -1,6 +1,6 @@
 /**
- * Folder class is just a File which is used to make the paths, then it's
- * children Files have a reference to its parent Folder, but essentially it's
+ * Folder class is just a File which is used to make the file´s paths, then it's
+ * children Files have a reference to its parent Folder. essentially it's
  * just like any other File, except that for being a parent of any File, it has
  * to be a Folder.
  *
@@ -9,12 +9,12 @@
 public class Folder extends File {
 
     /**
-     * Folders always have same size of 4K in the given datasets.
+     * Folders always have the same size of 4K in the given datasets.
      */
     private static final long FOLD_SIZE = 4L * 1024;
 
     /**
-     * Builds a new Folder with the given caracteristics and inside the given
+     * Builds a new Folder with the given characteristics and inside the given
      * Folder.
      *
      * @param name The name of the Folder.
@@ -26,8 +26,8 @@ public class Folder extends File {
     }
 
     /**
-     * Builds a new Folder with the given caracteristics and inside the given
-     * Folder.
+     * Builds a new Folder with the given characteristics and inside the given
+     * Folder. also includes the option to add the size of the new folder
      *
      * @param name The name of the Folder.
      * @param parent The Folder inside which this Folder is.
