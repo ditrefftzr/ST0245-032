@@ -1,7 +1,6 @@
 /**
- * New aproach for making a File, this time every File knows in which Folder it
- * is, and it's name, because for making search by name it's unnecessary to save
- * the other data.
+ * New aproach for making a File. this time every File knows in which Folder it
+ * is located, and it's name. Now includes the size of the file and the user it belongs to
  *
  * @author agusn
  */
@@ -48,7 +47,7 @@ public class File {
     /**
      * Indicates the size of this File.
      *
-     * @return The size field of this File.
+     * @return The size of this File.
      */
     public long getSize() {
         return size;
@@ -69,8 +68,8 @@ public class File {
     }
 
     /**
-     * Indicates the path from home of the current File, home must be the
-     * onliest Folder without a parent.
+     * Indicates the path from home to the current File, home must be the
+     * only Folder without a parent.
      *
      * @return The path from home of the current File.
      */
