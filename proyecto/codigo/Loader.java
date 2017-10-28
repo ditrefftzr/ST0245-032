@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.util.Stack;
 
 /**
- * The class Loader is the class which onliest job is to read the file which
- * containes the filestree and make a Folder with the same specifications.
+ * The class Loader is the class that reads the file which
+ * contains the file´s tree and makes a Folder with the same specifications.
  *
  * @author anietog1, kaparrah
  */
@@ -19,7 +19,7 @@ public class Loader {
     private final FileStructure files;
 
     /**
-     * Creates a new Loader which onliest job is to read a file and return a
+     * Creates a new Loader reads a file and returns a
      * Folder $HOME from it.
      *
      * @param filename The name of the file which contains the data - e.g.
@@ -105,7 +105,7 @@ public class Loader {
             files.add(inners.pop());
         }
 
-        //files.add(fold); if uncommented, added twice :vvvv
+        //files.add(fold); if uncommented, added twice
     }
 
     private long calcSize(String numbers, int modifier) {
@@ -125,7 +125,7 @@ public class Loader {
     }
 
     private File makeFor(Folder fold) throws IOException {
-        //don't need to go til '[' cuz already in there
+        //doesn't need to go to '[' because i´ts already there
         StringBuilder temp = new StringBuilder();
         while (!isBlank(curr = br.read())) {//getting the user
             temp.append((char) curr);
